@@ -52,7 +52,7 @@ int main()
                     }
                 }
             }
-            else if (str[i] == ' ' && flag)
+            else if (str[i] == ' ' and flag)
             {
                 if (y == -1) {
                     stack.push_back(x * y);
