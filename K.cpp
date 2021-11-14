@@ -1,7 +1,3 @@
-#include <iostream>
-#include <vector>
-#include<algorithm>
-
 class Points
 {	
 private:
@@ -66,15 +62,14 @@ std::ostream& operator << (std::ostream& os, Points& p) {
 	return os;
 }
 
-
 int main()
 {
 	int n;
 	std::cin >> n;
-	
+
 	std::vector<Points> v;
 	std::vector <std::pair<Points, int>> vp;
-	if (n != 0) 
+	if (n != 0)
 	{
 		for (int i = 0; i < n; ++i)
 		{
@@ -87,24 +82,27 @@ int main()
 
 		sort(v.rbegin(), v.rend());
 
-		while (!v.empty()) {
-			int value = count(v.begin(), v.end(), v[0]);
-			vp.push_back(std::make_pair(v[0], value));
+		while (!v.empty()) 
+		{
+			int value = count(v.begin(), v.end(), v.at(0));
+			vp.push_back(std::make_pair(v.at(0), value));
 			v.erase(v.begin(), v.begin() + value);
 		}
 
-
-		for (int i = 0; i < vp.size() - 1; ++i)
+		if (vp.size() > 1) 
 		{
-			for (int j = 0; j < vp.size() - i - 1; j++) {
-				if (vp[j].first.get_z() == vp[j + 1].first.get_z()
-					and vp[j].second < vp[j + 1].second)
-					swap(vp[j], vp[j + 1]);
+			for (int i = 1; i < vp.size(); ++i)
+			{
+				for (int j = 0; j < vp.size() - i; j++) {
+					if (vp.at(j).first.get_z() == vp.at(j + 1).first.get_z()
+						and vp.at(j).second < vp.at(j + 1).second)
+						swap(vp.at(j), vp.at(j + 1));
+				}
 			}
 		}
-
+		
 		for (int i = 0; i < vp.size(); ++i) {
-			std::cout << vp[i].first << "  " << '\n';
+			std::cout << vp.at(i).first << "  " << '\n';
 		}
 		std::cout << "\n";
 	}
